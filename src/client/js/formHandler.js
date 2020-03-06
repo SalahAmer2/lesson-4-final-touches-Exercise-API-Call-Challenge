@@ -7,12 +7,13 @@ function handleSubmit(event) {
   Client.checkForName(formText)
 
    console.log("::: Form Submitted :::")
-  fetch('http://localhost:8080/test')
-  .then(res => res.json())
-  .then(function(data) {
-      document.getElementById('results').innerHTML = data.message
-  })
+  // fetch('http://localhost:8080/test')
+  // .then(res => res.json())
+  // .then(function(data) {
+  //     document.getElementById('results').innerHTML = data.message
+  // })
 
+  //This below works and displays temperature number
   fetch(baseURL + "24701" + ",us&appid=" + apiKey)
     .then(res => {
         return res.json()
@@ -21,6 +22,20 @@ function handleSubmit(event) {
         document.getElementById('results').innerHTML = data.main.temp
     })
 }
+//This doesn't work here
+// const getFunc = async ()=>{
+//   const res = await fetch(baseURL+24701+",us&appid="+apiKey);
+//   try {
+//     const data = await res.json();
+//     console.log(data);
+//     apiTemp = data.main.temp;
+//     document.getElementById('results').innerHTML= apiTemp//LOOK HERE
+//   } catch(error) {
+//     console.log("error", error);
+//     //appropriately handle the error
+//   }
+// };
+// getFunc()
 
 export {
   handleSubmit

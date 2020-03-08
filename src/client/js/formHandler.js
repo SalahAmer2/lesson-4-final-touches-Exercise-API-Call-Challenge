@@ -14,28 +14,30 @@ function handleSubmit(event) {
   // })
 
   //This below works and displays temperature number
-  fetch(baseURL + "24701" + ",us&appid=" + apiKey)
-    .then(res => {
-        return res.json()
-    })
-    .then(function(data) {
-        document.getElementById('results').innerHTML = data.main.temp
-    })
+  // fetch(baseURL + "24701" + ",us&appid=" + apiKey)
+  //   .then(res => {
+  //       return res.json()
+  //   })
+  //   .then(function(data) {
+  //       document.getElementById('results').innerHTML = data.main.temp
+  //   })
+
+    //This works too and is better because uses async
+    const getFunc = async ()=>{
+      const res = await fetch(baseURL+24701+",us&appid="+apiKey);
+      try {
+        const data = await res.json();
+        console.log(data);
+        let apiTemp = data.main.temp;
+        document.getElementById('results').innerHTML= apiTemp//LOOK HERE
+      } catch(error) {
+        console.log("error", error);
+        //appropriately handle the error
+      }
+    };
+    getFunc()
 }
-//This doesn't work here
-// const getFunc = async ()=>{
-//   const res = await fetch(baseURL+24701+",us&appid="+apiKey);
-//   try {
-//     const data = await res.json();
-//     console.log(data);
-//     apiTemp = data.main.temp;
-//     document.getElementById('results').innerHTML= apiTemp//LOOK HERE
-//   } catch(error) {
-//     console.log("error", error);
-//     //appropriately handle the error
-//   }
-// };
-// getFunc()
+
 
 export {
   handleSubmit
